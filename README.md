@@ -2,6 +2,8 @@
 
 > 把一份简历改到「这个岗位缺的那个人」的样子：JD 拆解 → 关键词覆盖率 → 量化改写 → 可验证自检。
 
+![简历对岗改写](./market/social-preview.png)
+
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-SKILL.md-111827)](./SKILL.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e)](./LICENSE)
 [![No deps](https://img.shields.io/badge/依赖-无-0ea5e9)](#)
@@ -92,6 +94,8 @@ resume-tailor/
 └── examples/
     └── 01-pm-to-growth.md        # 完整案例：33% → 100%
 ```
+
+> `market/social-preview.png` 是本仓的社交预览图（1280×640），也用于 README 顶部与分享卡片。改文案后跑 `python ../make_previews.py --only resume-tailor` 重新生成。
 
 ## 自定义
 
