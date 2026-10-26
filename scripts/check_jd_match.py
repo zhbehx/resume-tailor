@@ -22,7 +22,20 @@ DEFAULT_LEXICON = Path(__file__).resolve().parent.parent / "references" / "skill
 WEAK_PATTERNS = [
     "负责", "参与", "协助", "配合", "跟进", "支持工作", "本人",
     "responsible for", "involved in", "assisted", "helped with",
+    "worked on", "supported", "coordinated", "participated in",
+    "contributed to", "in charge of", "took part in", "dealt with",
 ]
+
+# 弱动词只在「主语位置」才算：条目开头，或前面只有以代词结尾的短状语。
+# 反例：「销售跟进响应时间从 26 小时缩到 4 小时」——『跟进』是名词搭配的一部分。
+SUBJECT_TAIL = ("我", "我们", "本人", "自己", "咱")
+
+
+def at_subject_position(body: str, pos: int) -> bool:
+    prefix = body[:pos].strip(" ，,、：:的")
+    if not prefix:
+        return True
+    return len(prefix) <= 8 and prefix.endswith(SUBJECT_TAIL)
 
 # 数字或“百分比/数量”迹象：阿拉伯数字，或 中文数量 + 单位
 NUMBER_RE = re.compile(
@@ -77,8 +90,7 @@ def analyze(jd: str, resume: str, terms: list[str]) -> dict:
         body = line.strip().lstrip("-*·•|0123456789.、()（） ").strip()
         for pat in WEAK_PATTERNS:
             pos = body.lower().find(pat.lower())
-            # 只算“句首主谓”位置的弱动词：出现“销售跟进响应时间”这类名词搭配不算
-            if 0 <= pos <= 6:
+            if pos >= 0 and at_subject_position(body, pos):
                 weak_hits.append({"line": i, "word": pat, "text": line.strip()[:100]})
                 break
 
