@@ -122,3 +122,11 @@ A：反了。它主要工作是删：删弱动词、删形容词、删与 JD 无
 ## License
 
 [MIT](./LICENSE)
+
+---
+
+本仓库是 [zhbehx 的 Agent Skill 合集](https://github.com/zhbehx) 之一。
+
+觉得有用就点个 ⭐，是我继续加词库、加行业的动力。
+
+<!-- zhbehx-collection-footer -->
